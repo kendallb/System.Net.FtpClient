@@ -2127,29 +2127,11 @@ namespace System.Net.FtpClient {
         /// <example><code source="..\Examples\GetNameListing.cs" lang="cs" /></example>
         public string[] GetNameListing(string path) {
             List<string> lst = new List<string>();
-            string pwd = GetWorkingDirectory();
 
-            /*if (path == null || path.GetFtpPath().Trim().Length == 0 || path.StartsWith(".")) {
-                if (pwd == null || pwd.Length == 0) // couldn't get the working directory
-                    path = "./";
-                else if (path.StartsWith("./"))
-                    path = string.Format("{0}/{1}", pwd, path.Remove(0, 2));
-                else
-                    path = pwd;
-            }*/
-
-            path = path.GetFtpPath();
-            if (path == null || path.Trim().Length == 0) {
-                if (pwd != null && pwd.Trim().Length > 0)
-                    path = pwd;
-                else
-                    path = "./";
-            }
-            else if (!path.StartsWith("/") && pwd != null && pwd.Trim().Length > 0) {
-                if (path.StartsWith("./"))
-                    path = path.Remove(0, 2);
-                path = string.Format("{0}/{1}", pwd, path).GetFtpPath();
-            }
+            // If no path is provided, list all files in the current directory. Many FTP servers do *not*
+            // support listing files via a full path, only via the CWD.
+            if (path == null || path.Trim().Length == 0)
+                path = "*";
 
             lock (m_lock)
             {
