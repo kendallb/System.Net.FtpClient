@@ -3262,7 +3262,9 @@ namespace System.Net.FtpClient {
 
             switch (uri.Scheme.ToLower()) {
                 case "ftp":
+                    break;
                 case "ftps":
+                    cl.EncryptionMode = uri.Port == 990 ? FtpEncryptionMode.Implicit : FtpEncryptionMode.Explicit;
                     break;
                 default:
                     throw new UriFormatException("The specified URI scheme is not supported. Please use ftp:// or ftps://");
@@ -3270,6 +3272,11 @@ namespace System.Net.FtpClient {
 
             cl.Host = uri.Host;
             cl.Port = uri.Port;
+
+            // If the URI is set to ftps without an explicit port provided, the port is -1. If we set it to zero 0
+            // then the port used will depend on the encryption level that is requested.
+            if (cl.Port == -1)
+                cl.Port = 0;
 
             if (uri.UserInfo != null && uri.UserInfo.Length > 0) {
                 if (uri.UserInfo.Contains(":")) {
