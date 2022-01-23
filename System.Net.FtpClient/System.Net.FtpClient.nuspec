@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>AMain.FtpClient</id>
+    <version>1.0.0</version>
+    <title>AMain System.Net.FtpClient</title>
+    <authors>J.P. Trosclair, Kendall Bennett</authors>
+    <owners>kendallbennett</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/kendallb/System.Net.FtpClient</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>FTP Client Implementation for .NET</description>
+    <summary>Updated version of System.Net.FtpClient for .NET Standard</summary>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2013 J.P. Trosclair, Copyright 2022 and later AMain.com, Inc.</copyright>
+    <tags>FTP FTPS .net SSL TLS</tags>
+  </metadata>
+</package>
